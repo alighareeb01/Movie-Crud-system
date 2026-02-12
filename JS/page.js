@@ -18,7 +18,7 @@ let category = document.createElement("div");
 let year = document.createElement("div");
 let imageUpload = document.createElement("div");
 let addMovieButton = document.createElement("div");
-
+let updateMovieButton = document.createElement("div");
 /***************Append Elements to row**************/
 row.appendChild(header);
 row.appendChild(movieName);
@@ -27,6 +27,7 @@ row.appendChild(category);
 row.appendChild(year);
 row.appendChild(imageUpload);
 row.appendChild(addMovieButton);
+row.appendChild(updateMovieButton);
 
 /***************Add classes to elements**********/
 movieName.classList.add("movieName", "col-12", "col-md-3");
@@ -41,6 +42,15 @@ addMovieButton.classList.add(
   "d-flex",
   "justify-content-center",
   "addButton",
+);
+updateMovieButton.classList.add(
+  "updateMovieButton",
+  "mt-5",
+  "col-12",
+  "d-flex",
+  "justify-content-center",
+  "upadteButton",
+  "d-none",
 );
 
 /***************Add Content to each element***********/
@@ -124,8 +134,150 @@ button.classList.add("btn", "btn-primary", "btn-lg", "w-50", "p-2");
 button.textContent = "Add Movie";
 
 addMovieButton.appendChild(button);
+//button2    (addMovieButton)
+let button2 = document.createElement("button");
+button2.setAttribute("type", "button");
+button2.classList.add("btn", "btn-primary", "btn-lg", "w-50", "p-2");
+button2.textContent = "Update Movie";
+
+updateMovieButton.appendChild(button2);
 
 body.appendChild(container);
+
+/****************Search Inputs***************/
+/****************container3 and row3****************/
+
+let container3 = document.createElement("div");
+let row3 = document.createElement("div");
+
+container3.classList.add("container", "form-color");
+
+row3.classList.add("row", "g-1", "rowThree");
+
+/******************row elements*********/
+let searchInput = document.createElement("div");
+let searchNameButton = document.createElement("div");
+let searchDirectorButton = document.createElement("div");
+let searchCategoryButton = document.createElement("div");
+let searchYearButton = document.createElement("div");
+
+let saerchDiv = document.createElement("div");
+
+/********************Append elements to row********/
+
+//
+row3.appendChild(searchNameButton);
+row3.appendChild(searchDirectorButton);
+row3.appendChild(searchCategoryButton);
+row3.appendChild(searchYearButton);
+
+/***************Add classes to elements**********/
+// row3.classList.add(" justify-content-center");
+// row3FirstRow.classList.add("d-flex", "justify-content-center");
+// row3SecondRow.classList.add("d-flex", "justify-content-center");
+
+searchInput.classList.add("searchInput", "mb-5");
+searchNameButton.classList.add(
+  "col-6",
+  "col-md-3",
+  "d-flex",
+  "justify-content-center",
+);
+searchDirectorButton.classList.add(
+  "col-6",
+  "col-md-3",
+  "d-flex",
+  "justify-content-center",
+);
+searchCategoryButton.classList.add(
+  "col-6",
+  "col-md-3",
+  "d-flex",
+  "justify-content-center",
+);
+searchYearButton.classList.add(
+  "col-6",
+  "col-md-3",
+  "d-flex",
+  "justify-content-center",
+);
+
+/***************Add Content to each element***********/
+
+//movie name  (movieName)
+let searchInputLabel = document.createElement("label");
+let searchInputInput = document.createElement("input");
+
+searchInputLabel.setAttribute("for", "searchInput");
+searchInputInput.setAttribute("type", "text");
+searchInputInput.setAttribute("id", "searchInput");
+searchInputInput.setAttribute("placeholder", "Saerch ...");
+searchInputInput.classList.add("border", "border-0", "form-control");
+
+searchInput.appendChild(searchInputLabel);
+searchInput.appendChild(searchInputInput);
+
+//button    (searchNameButton)
+let button3 = document.createElement("button");
+button3.setAttribute("type", "button");
+button3.classList.add(
+  "search-movie",
+  "btn",
+  "btn-primary",
+  "btn-lg",
+  "w-50",
+  "p-2",
+);
+button3.textContent = "Search by movie";
+
+searchNameButton.appendChild(button3);
+//button    (searchDirectorButton)
+let button4 = document.createElement("button");
+button4.setAttribute("type", "button");
+button4.classList.add(
+  "search-director",
+  "btn",
+  "btn-primary",
+  "btn-lg",
+  "w-50",
+  "p-2",
+);
+button4.textContent = "search by Director";
+
+searchDirectorButton.appendChild(button4);
+//button    (searchCategoryButton)
+let button5 = document.createElement("button");
+button5.setAttribute("type", "button");
+button5.classList.add(
+  "search-category",
+  "btn",
+  "btn-primary",
+  "btn-lg",
+  "w-50",
+  "p-2",
+);
+button5.textContent = "search by Category";
+
+searchCategoryButton.appendChild(button5);
+//button    (searchYearButton)
+let button6 = document.createElement("button");
+button6.setAttribute("type", "button");
+button6.classList.add(
+  "search-year",
+  "btn",
+  "btn-primary",
+  "btn-lg",
+  "w-50",
+  "p-2",
+);
+button6.textContent = "Search by year";
+
+searchYearButton.appendChild(button6);
+
+saerchDiv.appendChild(searchInput);
+container3.appendChild(saerchDiv);
+container3.appendChild(row3);
+body.appendChild(container3);
 
 //HTML Display Inputs
 
@@ -133,8 +285,31 @@ body.appendChild(container);
 let container2 = document.createElement("div");
 let row2 = document.createElement("div");
 
-container2.classList.add("container", "mt-5");
+let headrDiv = document.createElement("div");
+headrDiv.classList.add("header-div");
+let headerH2 = document.createElement("div");
+headerH2.classList.add("text-primary", "text-center", "headrH2");
+headerH2.textContent = "Movies List";
+headerH2.style.fontSize = "32px";
+headrDiv.appendChild(headerH2);
+container2.appendChild(headrDiv);
+
+container2.classList.add("container", "mt-5", "containerTwo");
 container2.style.backgroundColor = "rgb(30, 30, 30)";
+
+let buttonDiv = document.createElement("div");
+// buttonDiv.classList.add("d-flex", "justify-content-end", "mb-3");
+let buttonAll = document.createElement("button");
+// buttonDiv.classList.add("button-all");
+buttonAll.setAttribute("type", "button");
+buttonAll.classList.add("show-all", "btn", "btn-primary", "btn-sm");
+
+buttonAll.textContent = "show all";
+
+buttonDiv.appendChild(buttonAll);
+
+container2.appendChild(buttonDiv);
+
 container2.appendChild(row2);
 row2.classList.add("row", "g-4", "rowTwo");
 
