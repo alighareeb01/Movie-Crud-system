@@ -1,0 +1,17 @@
+.body {
+  background-color: rgb(50, 50, 50);
+}
+
+.form-color {
+  background-color: rgb(30, 30, 30);
+  /* margin-top: 100px; */
+  padding: 50px;
+}
+.container2 {
+  background-color: rgb(255, 255, 255);
+}
+.card-img-top {
+  height: 150px;
+  width: 100%;
+  object-fit: cover;
+}
