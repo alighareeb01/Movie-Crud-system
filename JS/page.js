@@ -53,6 +53,37 @@ updateMovieButton.classList.add(
   "d-none",
 );
 
+/*************************Wrong Input Messages*******************************************/
+//movie name
+let erroeMovieName = document.createElement("p");
+erroeMovieName.textContent =
+  "allowed letters, numbers, space, and common punctuation with max length of 100 chs";
+erroeMovieName.classList.add("text-danger", "error-name", "d-none");
+//director name
+let erroeDirectorName = document.createElement("p");
+erroeDirectorName.textContent =
+  "allowed letters, spaces, hyphens, apostrophes with at least 2 characters, max 60";
+erroeDirectorName.classList.add("text-danger", "error-director", "d-none");
+//category name
+let erroeCategory = document.createElement("p");
+erroeCategory.textContent =
+  "allowed Letters only, spaces with at least 2 characters, max 30";
+erroeCategory.classList.add("text-danger", "error-category", "d-none");
+//yaar 
+let erroeYear = document.createElement("p");
+erroeYear.textContent ="must be within 1900 to 2099 with at least 4 digits";
+erroeYear.classList.add("text-danger", "error-year", "d-none");
+//image
+let erroeImage = document.createElement("p");
+erroeImage.textContent= "You must upload a photo";
+erroeImage.classList.add("text-danger", "error-image", "d-none");
+//search
+let erroeSearch = document.createElement("p");
+erroeSearch.textContent = "Wrong search inputs";
+erroeSearch.classList.add("text-danger", "error-search", "d-none");
+/************************************************************************************/
+
+
 /***************Add Content to each element***********/
 //header     (header)
 let headerH1 = document.createElement("h1");
@@ -72,6 +103,7 @@ movieNameInput.classList.add("border", "border-0", "form-control");
 
 movieName.appendChild(movieNameLabel);
 movieName.appendChild(movieNameInput);
+movieName.appendChild(erroeMovieName);
 
 //Director name    (directorName)
 let DirectorNameLabel = document.createElement("label");
@@ -85,6 +117,8 @@ DirectorNameInput.classList.add("border", "border-0", "form-control");
 
 directorName.appendChild(DirectorNameLabel);
 directorName.appendChild(DirectorNameInput);
+directorName.appendChild(erroeDirectorName);
+
 
 //Category   (category)
 let CategoryNameLabel = document.createElement("label");
@@ -98,6 +132,7 @@ CategoryNameInput.classList.add("border", "border-0", "form-control");
 
 category.appendChild(CategoryNameLabel);
 category.appendChild(CategoryNameInput);
+category.appendChild(erroeCategory);
 
 //year  (year)
 let yearLabel = document.createElement("label");
@@ -111,6 +146,7 @@ yearInput.classList.add("border", "border-0", "form-control");
 
 year.appendChild(yearLabel);
 year.appendChild(yearInput);
+year.appendChild(erroeYear);
 
 //image   (imageUpload)
 let imageUploadDiv = document.createElement("div");
@@ -123,9 +159,11 @@ imageLabel.textContent = "upload your image";
 imageInput.classList.add("form-control", "imageInput");
 imageInput.setAttribute("type", "file");
 imageInput.setAttribute("id", "formFile");
+
 imageUploadDiv.appendChild(imageLabel);
 imageUploadDiv.appendChild(imageInput);
 imageUpload.appendChild(imageUploadDiv);
+imageUpload.appendChild(erroeImage);
 
 //button    (addMovieButton)
 let button = document.createElement("button");
@@ -216,6 +254,7 @@ searchInputInput.classList.add("border", "border-0", "form-control");
 
 searchInput.appendChild(searchInputLabel);
 searchInput.appendChild(searchInputInput);
+searchInput.appendChild(erroeSearch);
 
 //button    (searchNameButton)
 let button3 = document.createElement("button");

@@ -7,7 +7,8 @@ let addButtonMain = document.querySelector(".addMovieButton");
 let updateButtonMain = document.querySelector(".updateMovieButton");
 
 //global flags to validate inputs
-let nameFlag = 0;
+// const inputFlag = 1;
+// const searchFlagName = 2;
 
 //get rowTwo for Display
 let rowTwo = document.querySelector(".rowTwo");
@@ -116,15 +117,20 @@ function Display() {
 
     let pOne = document.createElement("p");
     pOne.classList.add("card-text");
-    pOne.textContent = `${im[i].year}`;
+    pOne.textContent = `Year : ${im[i].year}`;
     cardBody.appendChild(pOne);
 
     let pTwo = document.createElement("p");
-    pTwo.textContent = `${im[i].director}`;
+    pTwo.textContent = `Director : ${im[i].director}`;
     cardBody.appendChild(pTwo);
+
+    let pThtree = document.createElement("p");
+    pThtree.textContent = `Category : ${im[i].category}`;
+    cardBody.appendChild(pThtree);
 
     let MovieButtons = document.createElement("div");
     MovieButtons.classList.add(
+      "mt-2",
       "movie-buttons",
       "d-flex",
       "flex-wrap",
@@ -164,7 +170,7 @@ function Display() {
       "m-1",
     );
     //to get thtat index later in del and upaadete
-    cardRemove.setAttribute("index", `${i}`);
+    cardRemove.setAttribute("item-index", `${i}`);
     cardRemove.textContent = "Remove";
 
     MovieButtons.appendChild(MovieButtonOne);
@@ -218,14 +224,25 @@ function Display() {
 /******Better way */
 //remove btn
 rowTwo.addEventListener("click", (e) => {
+
   if (e.target.classList.contains("remove-button")) {
-    let index = e.target.getAttribute("item-index");
-    console.log(`element removed num ${index}`);
-    MovieList.splice(index, 1);
-    localStorage.setItem("list", JSON.stringify(MovieList));
-    Display();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
+      Swal.fire({
+   title: "Are you sure?",
+   text: "You won't be able to revert this!",
+   icon: "warning",
+   showCancelButton: true,
+   confirmButtonColor: "#3085d6",
+   cancelButtonColor: "#d33",
+   confirmButtonText: "Yes, delete it!",
+      }).then(() => {
+   let index = e.target.getAttribute("item-index");
+     console.log(`element removed num ${index}`);
+     MovieList.splice(index, 1);
+     localStorage.setItem("list", JSON.stringify(MovieList));
+     Display();
+ })
+     
+   }
 });
 //update btn
 //to use in the update
@@ -296,9 +313,17 @@ let SearchByDirectorButton = document.querySelector(".search-director");
 let SearchByCategoryButton = document.querySelector(".search-category");
 let SearchByYearButton = document.querySelector(".search-year");
 
+const errorSearch = document.querySelector(".error-search");
+
 let rowThree = document.querySelector(".rowThree");
 
 rowThree.addEventListener("click", (e) => {
+  if (searchInputMain.value === "") {
+    errorSearch.classList.remove("d-none");
+    return;
+  } else {
+    errorSearch.classList.add("d-none");
+  }
   let searchInput = searchInputMain.value.trim().toLowerCase();
   const saved = JSON.parse(localStorage.getItem("list"));
   let newList = [];
@@ -378,6 +403,9 @@ let showAll = document.querySelector(".show-all");
 
 showAll.addEventListener("click", () => {
   Display();
+  searchInputMain.classList.remove("is-invalid");
+  searchInputMain.classList.remove("is-valid");
+  errorSearch.classList.add("d-none");
 });
 
 // const imagepath = localStorage.getItem("list");
@@ -386,11 +414,21 @@ showAll.addEventListener("click", () => {
 
 //validating input
 
-function valid() {
+// variables
+const errorName = document.querySelector(".error-name");
+const errorDiretor = document.querySelector(".error-director");
+const errorCAtegory = document.querySelector(".error-category");
+const errorYear = document.querySelector(".error-year");
+const errorImage = document.querySelector(".error-image");
+
+function valid(vlaue) {
+  //regex value
+
   const movieNameRegex = /^[a-zA-Z0-9\s:,.!'?\-&]{1,100}$/;
-  const directorRegex = /^[a-zA-Z\s'-]{2,60}$/;
+  directorRegex = /^[a-zA-Z\s'-]{2,60}$/;
   const categoryRegex = /^[a-zA-Z\s-]{2,30}$/;
   const yearRegex = /^(19|20)\d{2}$/;
+  //checking for input
 
   let flagname = 0;
   let flagdirector = 0;
@@ -400,43 +438,100 @@ function valid() {
   if (movieNameRegex.test(nameMain.value.trim())) {
     nameMain.classList.remove("is-invalid");
     nameMain.classList.add("is-valid");
+    errorName.classList.add("d-none");
     flagname = 1;
   } else {
     nameMain.classList.remove("is-valid");
     nameMain.classList.add("is-invalid");
+    errorName.classList.remove("d-none");
   }
   if (directorRegex.test(directorMain.value.trim())) {
     directorMain.classList.remove("is-invalid");
     directorMain.classList.add("is-valid");
+    errorDiretor.classList.add("d-none");
     flagdirector = 1;
   } else {
     directorMain.classList.remove("is-valid");
     directorMain.classList.add("is-invalid");
+    errorDiretor.classList.remove("d-none");
   }
   if (categoryRegex.test(categoryMain.value.trim())) {
     categoryMain.classList.remove("is-invalid");
     categoryMain.classList.add("is-valid");
+    errorCAtegory.classList.add("d-none");
     flagcategory = 1;
   } else {
     categoryMain.classList.remove("is-valid");
     categoryMain.classList.add("is-invalid");
+    errorCAtegory.classList.remove("d-none");
   }
   if (yearRegex.test(yearMain.value.trim())) {
     yearMain.classList.remove("is-invalid");
     yearMain.classList.add("is-valid");
+    errorYear.classList.add("d-none");
     flagyear = 1;
   } else {
     yearMain.classList.remove("is-valid");
     yearMain.classList.add("is-invalid");
+    errorYear.classList.remove("d-none");
   }
   if (imageInputMain.files.length > 0) {
     imageInputMain.classList.remove("is-invalid");
     imageInputMain.classList.add("is-valid");
+    errorImage.classList.add("d-none");
     flagimage = 1;
   } else {
     imageInputMain.classList.remove("is-valid");
     imageInputMain.classList.add("is-invalid");
+    errorImage.classList.remove("d-none");
   }
 
   return flagname && flagdirector && flagyear && flagimage && flagcategory;
+
+  // let seachFlag = 0;
+  // //cheacking for seach
+
+  // if (vlaue === 2) {
+  //   if (movieNameRegex.test(searchInputMain.value.trim())) {
+  //     // searchInputMain.classList.remove("is-invalid");
+  //     // searchInputMain.classList.add("is-valid");
+  //     errorSearch.classList.add("d-none");
+  //     seachFlag = 1;
+  //   } else {
+  //     // searchInputMain.classList.remove("is-valid");
+  //     // searchInputMain.classList.add("is-invalid");
+  //     errorSearch.classList.remove("d-none");
+  //   }
+  //   if (directorRegex.test(searchInputMain.value.trim())) {
+  //     // searchInputMain.classList.remove("is-invalid");
+  //     // searchInputMain.classList.add("is-valid");
+  //     errorSearch.classList.add("d-none");
+  //     seachFlag = 1;
+  //   } else {
+  //     // searchInputMain.classList.remove("is-valid");
+  //     // searchInputMain.classList.add("is-invalid");
+  //     errorSearch.classList.remove("d-none");
+  //   }
+  //   if (categoryRegex.test(searchInputMain.value.trim())) {
+  //     // searchInputMain.classList.remove("is-invalid");
+  //     // searchInputMain.classList.add("is-valid");
+  //     errorSearch.classList.add("d-none");
+  //     seachFlag = 1;
+  //   } else {
+  //     // searchInputMain.classList.remove("is-valid");
+  //     // searchInputMain.classList.add("is-invalid");
+  //     errorSearch.classList.remove("d-none");
+  //   }
+  //   if (yearRegex.test(searchInputMain.value.trim())) {
+  //     // searchInputMain.classList.remove("is-invalid");
+  //     // searchInputMain.classList.add("is-valid");
+  //     errorSearch.classList.add("d-none");
+  //     seachFlag = 1;
+  //   } else {
+  //     // searchInputMain.classList.remove("is-valid");
+  //     // searchInputMain.classList.add("is-invalid");
+  //     errorSearch.classList.remove("d-none");
+  //   }
+  //   return seachFlag;
+  // }
 }
