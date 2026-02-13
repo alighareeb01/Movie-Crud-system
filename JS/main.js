@@ -53,6 +53,10 @@ addButtonMain.addEventListener("click", (e) => {
     ClearInputs();
     nameMain.focus();
     Display();
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth",
+    });
   });
 
   reader.readAsDataURL(imageInputMain.files[0]);
@@ -224,25 +228,23 @@ function Display() {
 /******Better way */
 //remove btn
 rowTwo.addEventListener("click", (e) => {
-
   if (e.target.classList.contains("remove-button")) {
-      Swal.fire({
-   title: "Are you sure?",
-   text: "You won't be able to revert this!",
-   icon: "warning",
-   showCancelButton: true,
-   confirmButtonColor: "#3085d6",
-   cancelButtonColor: "#d33",
-   confirmButtonText: "Yes, delete it!",
-      }).then(() => {
-   let index = e.target.getAttribute("item-index");
-     console.log(`element removed num ${index}`);
-     MovieList.splice(index, 1);
-     localStorage.setItem("list", JSON.stringify(MovieList));
-     Display();
- })
-     
-   }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(() => {
+      let index = e.target.getAttribute("item-index");
+      console.log(`element removed num ${index}`);
+      MovieList.splice(index, 1);
+      localStorage.setItem("list", JSON.stringify(MovieList));
+      Display();
+    });
+  }
 });
 //update btn
 //to use in the update
@@ -296,6 +298,10 @@ updateButtonMain.addEventListener("click", (e) => {
     ClearInputs();
     nameMain.focus();
     Display();
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth",
+    });
   });
 
   reader.readAsDataURL(imageInputMain.files[0]);
