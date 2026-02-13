@@ -360,6 +360,7 @@ rowThree.addEventListener("click", (e) => {
       }
     }
   }
+
   searchInputMain.value = "";
   rowTwo.innerHTML = "";
   for (let i = 0; i < newList.length; i++) {
@@ -395,6 +396,10 @@ rowThree.addEventListener("click", (e) => {
 
     card.appendChild(cardBody);
   }
+  window.scrollTo({
+    top: document.documentElement.scrollHeight,
+    behavior: "smooth",
+  });
 });
 
 //show all elements
@@ -406,6 +411,10 @@ showAll.addEventListener("click", () => {
   searchInputMain.classList.remove("is-invalid");
   searchInputMain.classList.remove("is-valid");
   errorSearch.classList.add("d-none");
+  window.scrollTo({
+    top: document.documentElement.scrollHeight,
+    behavior: "smooth",
+  });
 });
 
 // const imagepath = localStorage.getItem("list");
